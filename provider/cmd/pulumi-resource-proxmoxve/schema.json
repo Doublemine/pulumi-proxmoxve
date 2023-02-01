@@ -1,0 +1,1776 @@
+{
+    "name": "proxmoxve",
+    "displayName": "pulumi-proxmoxve",
+    "description": "A Pulumi package for creating and managing proxmoxve cloud resources.",
+    "keywords": [
+        "pulumi",
+        "proxmoxve",
+        "category/cloud"
+    ],
+    "homepage": "https://www.pulumi.com",
+    "license": "Apache-2.0",
+    "attribution": "This Pulumi package is based on the [`proxmoxve` Terraform Provider](https://github.com/Doublemine/terraform-provider-proxmoxve).",
+    "repository": "https://github.com/Doublemine/pulumi-proxmoxve",
+    "publisher": "Doublemine",
+    "meta": {
+        "moduleFormat": "(.*)(?:/[^/]*)"
+    },
+    "language": {
+        "csharp": {
+            "compatibility": "tfbridge20",
+            "namespaces": null,
+            "packageReferences": {
+                "Pulumi": "3.*"
+            }
+        },
+        "go": {
+            "generateExtraInputTypes": true,
+            "generateResourceContainerTypes": true,
+            "importBasePath": "github.com/Doublemine/pulumi-proxmoxve/sdk/go/proxmoxve"
+        },
+        "nodejs": {
+            "compatibility": "tfbridge20",
+            "dependencies": {
+                "@pulumi/pulumi": "^3.0.0"
+            },
+            "devDependencies": {
+                "@types/mime": "^2.0.0",
+                "@types/node": "^10.0.0"
+            },
+            "disableUnionOutputTypes": true,
+            "packageDescription": "A Pulumi package for creating and managing proxmoxve cloud resources.",
+            "packageName": "@doublemine/pulumi-proxmoxve",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/Doublemine/terraform-provider-proxmoxve)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-proxmoxve` repo](https://github.com/Doublemine/pulumi-proxmoxve/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-proxmoxve` repo](https://github.com/Doublemine/terraform-provider-proxmoxve/issues).",
+            "typescriptVersion": ""
+        },
+        "python": {
+            "compatibility": "tfbridge20",
+            "readme": "\u003e This provider is a derived work of the [Terraform Provider](https://github.com/Doublemine/terraform-provider-proxmoxve)\n\u003e distributed under [MPL 2.0](https://www.mozilla.org/en-US/MPL/2.0/). If you encounter a bug or missing feature,\n\u003e first check the [`pulumi-proxmoxve` repo](https://github.com/Doublemine/pulumi-proxmoxve/issues); however, if that doesn't turn up anything,\n\u003e please consult the source [`terraform-provider-proxmoxve` repo](https://github.com/Doublemine/terraform-provider-proxmoxve/issues).",
+            "requires": {
+                "pulumi": "\u003e=3.0.0,\u003c4.0.0"
+            }
+        }
+    },
+    "config": {
+        "variables": {
+            "pmApiTokenId": {
+                "type": "string",
+                "description": "API TokenID e.g. root@pam!mytesttoken\n"
+            },
+            "pmApiTokenSecret": {
+                "type": "string",
+                "description": "The secret uuid corresponding to a TokenID\n"
+            },
+            "pmApiUrl": {
+                "type": "string",
+                "description": "https://host.fqdn:8006/api2/json\n"
+            },
+            "pmDangerouslyIgnoreUnknownAttributes": {
+                "type": "boolean",
+                "description": "By default this provider will exit if an unknown attribute is found. This is to prevent the accidential destruction of\nVMs or Data when something in the proxmox API has changed/updated and is not confirmed to work with this provider. Set\nthis to true at your own risk. It may allow you to proceed in cases when the provider refuses to work, but be aware of\nthe danger in doing so.\n"
+            },
+            "pmDebug": {
+                "type": "boolean",
+                "description": "Enable or disable the verbose debug output from proxmox api\n"
+            },
+            "pmHttpHeaders": {
+                "type": "string",
+                "description": "Set custom http headers e.g. Key,Value,Key1,Value1\n"
+            },
+            "pmLogEnable": {
+                "type": "boolean",
+                "description": "Enable provider logging to get proxmox API logs\n"
+            },
+            "pmLogFile": {
+                "type": "string",
+                "description": "Write logs to this specific file\n"
+            },
+            "pmLogLevels": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "pulumi.json#/Any"
+                },
+                "description": "Configure the logging level to display; trace, debug, info, warn, etc\n"
+            },
+            "pmOtp": {
+                "type": "string",
+                "description": "OTP 2FA code (if required)\n"
+            },
+            "pmParallel": {
+                "type": "integer"
+            },
+            "pmPassword": {
+                "type": "string",
+                "description": "Password to authenticate into proxmox\n"
+            },
+            "pmProxyServer": {
+                "type": "string",
+                "description": "Proxy Server passed to Api client(useful for debugging). Syntax: http://proxy:port\n"
+            },
+            "pmTimeout": {
+                "type": "integer",
+                "description": "How many seconds to wait for operations for both provider and api-client, default is 20m\n"
+            },
+            "pmTlsInsecure": {
+                "type": "boolean",
+                "description": "By default, every TLS connection is verified to be secure. This option allows terraform to proceed and operate on\nservers considered insecure. For example if you're connecting to a remote host and you do not have the CA cert that\nissued the proxmox api url's certificate.\n"
+            },
+            "pmUser": {
+                "type": "string",
+                "description": "Username e.g. myuser or myuser@pam\n"
+            }
+        }
+    },
+    "types": {
+        "proxmoxve:index/QemuVMDisk:QemuVMDisk": {
+            "properties": {
+                "aio": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "backup": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "cache": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "discard": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "file": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "format": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iops": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iopsMax": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iopsMaxLength": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iopsRd": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iopsRdMax": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iopsRdMaxLength": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iopsWr": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iopsWrMax": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iopsWrMaxLength": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "iothread": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "mbps": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "mbpsRd": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "mbpsRdMax": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "mbpsWr": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "mbpsWrMax": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "media": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "replicate": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "size": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "slot": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "ssd": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "storage": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "storageType": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "volume": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "size",
+                "storage",
+                "type"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "file",
+                        "format",
+                        "media",
+                        "size",
+                        "slot",
+                        "storage",
+                        "storageType",
+                        "type",
+                        "volume"
+                    ]
+                }
+            }
+        },
+        "proxmoxve:index/QemuVMHostpci:QemuVMHostpci": {
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "pcie": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "rombar": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "proxmoxve:index/QemuVMNetwork:QemuVMNetwork": {
+            "properties": {
+                "bridge": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "firewall": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "linkDown": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "macaddr": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "model": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "mtu": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "queues": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "rate": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "tag": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "model"
+            ],
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "macaddr",
+                        "model",
+                        "queues",
+                        "rate"
+                    ]
+                }
+            }
+        },
+        "proxmoxve:index/QemuVMSerial:QemuVMSerial": {
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "id",
+                "type"
+            ]
+        },
+        "proxmoxve:index/QemuVMUnusedDisk:QemuVMUnusedDisk": {
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "slot": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "storage": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "language": {
+                "nodejs": {
+                    "requiredOutputs": [
+                        "file",
+                        "slot",
+                        "storage"
+                    ]
+                }
+            }
+        },
+        "proxmoxve:index/QemuVMUsb:QemuVMUsb": {
+            "properties": {
+                "host": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "usb3": {
+                    "type": "boolean",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object",
+            "required": [
+                "host"
+            ]
+        },
+        "proxmoxve:index/QemuVMVga:QemuVMVga": {
+            "properties": {
+                "memory": {
+                    "type": "integer",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                },
+                "type": {
+                    "type": "string",
+                    "language": {
+                        "python": {
+                            "mapCase": false
+                        }
+                    }
+                }
+            },
+            "type": "object"
+        }
+    },
+    "provider": {
+        "description": "The provider type for the proxmoxve package. By default, resources use package-wide configuration\nsettings, however an explicit `Provider` instance may be created and passed during resource\nconstruction to achieve fine-grained programmatic control over provider settings. See the\n[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.\n",
+        "properties": {
+            "pmApiTokenId": {
+                "type": "string",
+                "description": "API TokenID e.g. root@pam!mytesttoken\n"
+            },
+            "pmApiTokenSecret": {
+                "type": "string",
+                "description": "The secret uuid corresponding to a TokenID\n"
+            },
+            "pmApiUrl": {
+                "type": "string",
+                "description": "https://host.fqdn:8006/api2/json\n"
+            },
+            "pmDangerouslyIgnoreUnknownAttributes": {
+                "type": "boolean",
+                "description": "By default this provider will exit if an unknown attribute is found. This is to prevent the accidential destruction of\nVMs or Data when something in the proxmox API has changed/updated and is not confirmed to work with this provider. Set\nthis to true at your own risk. It may allow you to proceed in cases when the provider refuses to work, but be aware of\nthe danger in doing so.\n"
+            },
+            "pmDebug": {
+                "type": "boolean",
+                "description": "Enable or disable the verbose debug output from proxmox api\n"
+            },
+            "pmHttpHeaders": {
+                "type": "string",
+                "description": "Set custom http headers e.g. Key,Value,Key1,Value1\n"
+            },
+            "pmLogEnable": {
+                "type": "boolean",
+                "description": "Enable provider logging to get proxmox API logs\n"
+            },
+            "pmLogFile": {
+                "type": "string",
+                "description": "Write logs to this specific file\n"
+            },
+            "pmLogLevels": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "pulumi.json#/Any"
+                },
+                "description": "Configure the logging level to display; trace, debug, info, warn, etc\n"
+            },
+            "pmOtp": {
+                "type": "string",
+                "description": "OTP 2FA code (if required)\n"
+            },
+            "pmParallel": {
+                "type": "integer"
+            },
+            "pmPassword": {
+                "type": "string",
+                "description": "Password to authenticate into proxmox\n"
+            },
+            "pmProxyServer": {
+                "type": "string",
+                "description": "Proxy Server passed to Api client(useful for debugging). Syntax: http://proxy:port\n"
+            },
+            "pmTimeout": {
+                "type": "integer",
+                "description": "How many seconds to wait for operations for both provider and api-client, default is 20m\n"
+            },
+            "pmTlsInsecure": {
+                "type": "boolean",
+                "description": "By default, every TLS connection is verified to be secure. This option allows terraform to proceed and operate on\nservers considered insecure. For example if you're connecting to a remote host and you do not have the CA cert that\nissued the proxmox api url's certificate.\n"
+            },
+            "pmUser": {
+                "type": "string",
+                "description": "Username e.g. myuser or myuser@pam\n"
+            }
+        },
+        "inputProperties": {
+            "pmApiTokenId": {
+                "type": "string",
+                "description": "API TokenID e.g. root@pam!mytesttoken\n"
+            },
+            "pmApiTokenSecret": {
+                "type": "string",
+                "description": "The secret uuid corresponding to a TokenID\n"
+            },
+            "pmApiUrl": {
+                "type": "string",
+                "description": "https://host.fqdn:8006/api2/json\n"
+            },
+            "pmDangerouslyIgnoreUnknownAttributes": {
+                "type": "boolean",
+                "description": "By default this provider will exit if an unknown attribute is found. This is to prevent the accidential destruction of\nVMs or Data when something in the proxmox API has changed/updated and is not confirmed to work with this provider. Set\nthis to true at your own risk. It may allow you to proceed in cases when the provider refuses to work, but be aware of\nthe danger in doing so.\n"
+            },
+            "pmDebug": {
+                "type": "boolean",
+                "description": "Enable or disable the verbose debug output from proxmox api\n"
+            },
+            "pmHttpHeaders": {
+                "type": "string",
+                "description": "Set custom http headers e.g. Key,Value,Key1,Value1\n"
+            },
+            "pmLogEnable": {
+                "type": "boolean",
+                "description": "Enable provider logging to get proxmox API logs\n"
+            },
+            "pmLogFile": {
+                "type": "string",
+                "description": "Write logs to this specific file\n"
+            },
+            "pmLogLevels": {
+                "type": "object",
+                "additionalProperties": {
+                    "$ref": "pulumi.json#/Any"
+                },
+                "description": "Configure the logging level to display; trace, debug, info, warn, etc\n"
+            },
+            "pmOtp": {
+                "type": "string",
+                "description": "OTP 2FA code (if required)\n"
+            },
+            "pmParallel": {
+                "type": "integer"
+            },
+            "pmPassword": {
+                "type": "string",
+                "description": "Password to authenticate into proxmox\n"
+            },
+            "pmProxyServer": {
+                "type": "string",
+                "description": "Proxy Server passed to Api client(useful for debugging). Syntax: http://proxy:port\n"
+            },
+            "pmTimeout": {
+                "type": "integer",
+                "description": "How many seconds to wait for operations for both provider and api-client, default is 20m\n"
+            },
+            "pmTlsInsecure": {
+                "type": "boolean",
+                "description": "By default, every TLS connection is verified to be secure. This option allows terraform to proceed and operate on\nservers considered insecure. For example if you're connecting to a remote host and you do not have the CA cert that\nissued the proxmox api url's certificate.\n"
+            },
+            "pmUser": {
+                "type": "string",
+                "description": "Username e.g. myuser or myuser@pam\n"
+            }
+        }
+    },
+    "resources": {
+        "proxmoxve:index/pool:Pool": {
+            "properties": {
+                "comment": {
+                    "type": "string"
+                },
+                "poolid": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "poolid"
+            ],
+            "inputProperties": {
+                "comment": {
+                    "type": "string"
+                },
+                "poolid": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "poolid"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering Pool resources.\n",
+                "properties": {
+                    "comment": {
+                        "type": "string"
+                    },
+                    "poolid": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "proxmoxve:index/qemuVM:QemuVM": {
+            "properties": {
+                "additionalWait": {
+                    "type": "integer"
+                },
+                "agent": {
+                    "type": "integer"
+                },
+                "args": {
+                    "type": "string"
+                },
+                "automaticReboot": {
+                    "type": "boolean",
+                    "description": "Automatically reboot the VM if any of the modified parameters requires a reboot to take effect.\n"
+                },
+                "balloon": {
+                    "type": "integer"
+                },
+                "bios": {
+                    "type": "string",
+                    "description": "The VM bios, it can be seabios or ovmf\n"
+                },
+                "boot": {
+                    "type": "string",
+                    "description": "Boot order of the VM\n"
+                },
+                "bootdisk": {
+                    "type": "string"
+                },
+                "bridge": {
+                    "type": "string",
+                    "deprecationMessage": "Use `network.bridge` instead"
+                },
+                "ciWait": {
+                    "type": "integer"
+                },
+                "cicustom": {
+                    "type": "string"
+                },
+                "cipassword": {
+                    "type": "string"
+                },
+                "ciuser": {
+                    "type": "string"
+                },
+                "clone": {
+                    "type": "string"
+                },
+                "cloneWait": {
+                    "type": "integer"
+                },
+                "cloudinitCdromStorage": {
+                    "type": "string"
+                },
+                "cores": {
+                    "type": "integer"
+                },
+                "cpu": {
+                    "type": "string"
+                },
+                "defaultIpv4Address": {
+                    "type": "string",
+                    "description": "Use to track vm ipv4 address\n"
+                },
+                "defineConnectionInfo": {
+                    "type": "boolean",
+                    "description": "By default define SSH for provisioner info\n"
+                },
+                "desc": {
+                    "type": "string",
+                    "description": "The VM description\n"
+                },
+                "diskGb": {
+                    "type": "number",
+                    "deprecationMessage": "Use `disk.size` instead"
+                },
+                "disks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMDisk:QemuVMDisk"
+                    }
+                },
+                "forceCreate": {
+                    "type": "boolean"
+                },
+                "forceRecreateOnChangeOf": {
+                    "type": "string"
+                },
+                "fullClone": {
+                    "type": "boolean"
+                },
+                "guestAgentReadyTimeout": {
+                    "type": "integer",
+                    "deprecationMessage": "Use custom per-resource timeout instead. See https://www.terraform.io/docs/language/resources/syntax.html#operation-timeouts"
+                },
+                "hagroup": {
+                    "type": "string"
+                },
+                "hastate": {
+                    "type": "string"
+                },
+                "hostpcis": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMHostpci:QemuVMHostpci"
+                    }
+                },
+                "hotplug": {
+                    "type": "string"
+                },
+                "ipconfig0": {
+                    "type": "string"
+                },
+                "ipconfig1": {
+                    "type": "string"
+                },
+                "ipconfig10": {
+                    "type": "string"
+                },
+                "ipconfig11": {
+                    "type": "string"
+                },
+                "ipconfig12": {
+                    "type": "string"
+                },
+                "ipconfig13": {
+                    "type": "string"
+                },
+                "ipconfig14": {
+                    "type": "string"
+                },
+                "ipconfig15": {
+                    "type": "string"
+                },
+                "ipconfig2": {
+                    "type": "string"
+                },
+                "ipconfig3": {
+                    "type": "string"
+                },
+                "ipconfig4": {
+                    "type": "string"
+                },
+                "ipconfig5": {
+                    "type": "string"
+                },
+                "ipconfig6": {
+                    "type": "string"
+                },
+                "ipconfig7": {
+                    "type": "string"
+                },
+                "ipconfig8": {
+                    "type": "string"
+                },
+                "ipconfig9": {
+                    "type": "string"
+                },
+                "iso": {
+                    "type": "string"
+                },
+                "kvm": {
+                    "type": "boolean"
+                },
+                "mac": {
+                    "type": "string",
+                    "deprecationMessage": "Use `network.macaddr` to access the auto generated MAC address"
+                },
+                "memory": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The VM name\n"
+                },
+                "nameserver": {
+                    "type": "string"
+                },
+                "networks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMNetwork:QemuVMNetwork"
+                    }
+                },
+                "nic": {
+                    "type": "string",
+                    "deprecationMessage": "Use `network` instead"
+                },
+                "numa": {
+                    "type": "boolean"
+                },
+                "onboot": {
+                    "type": "boolean",
+                    "description": "VM autostart on boot\n"
+                },
+                "oncreate": {
+                    "type": "boolean",
+                    "description": "VM autostart on create\n"
+                },
+                "osNetworkConfig": {
+                    "type": "string"
+                },
+                "osType": {
+                    "type": "string"
+                },
+                "pool": {
+                    "type": "string"
+                },
+                "preprovision": {
+                    "type": "boolean",
+                    "deprecationMessage": "do not use anymore"
+                },
+                "pxe": {
+                    "type": "boolean"
+                },
+                "qemuOs": {
+                    "type": "string"
+                },
+                "rebootRequired": {
+                    "type": "boolean",
+                    "description": "Internal variable, true if any of the modified parameters requires a reboot to take effect.\n"
+                },
+                "scsihw": {
+                    "type": "string"
+                },
+                "searchdomain": {
+                    "type": "string"
+                },
+                "serials": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMSerial:QemuVMSerial"
+                    }
+                },
+                "sockets": {
+                    "type": "integer"
+                },
+                "sshForwardIp": {
+                    "type": "string",
+                    "description": "Use to pass instance ip address, redundant\n"
+                },
+                "sshHost": {
+                    "type": "string"
+                },
+                "sshPort": {
+                    "type": "string"
+                },
+                "sshPrivateKey": {
+                    "type": "string"
+                },
+                "sshUser": {
+                    "type": "string"
+                },
+                "sshkeys": {
+                    "type": "string"
+                },
+                "startup": {
+                    "type": "string",
+                    "description": "Startup order of the VM\n"
+                },
+                "storage": {
+                    "type": "string",
+                    "deprecationMessage": "Use `disk.storage` instead"
+                },
+                "storageType": {
+                    "type": "string",
+                    "deprecationMessage": "Use `disk.type` instead"
+                },
+                "tablet": {
+                    "type": "boolean",
+                    "description": "Enable tablet mode in the VM\n"
+                },
+                "tags": {
+                    "type": "string"
+                },
+                "targetNode": {
+                    "type": "string",
+                    "description": "The node where VM goes to\n"
+                },
+                "unusedDisks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMUnusedDisk:QemuVMUnusedDisk"
+                    },
+                    "description": "Record unused disks in proxmox. This is intended to be read-only for now.\n"
+                },
+                "usbs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMUsb:QemuVMUsb"
+                    }
+                },
+                "vcpus": {
+                    "type": "integer"
+                },
+                "vgas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMVga:QemuVMVga"
+                    }
+                },
+                "vlan": {
+                    "type": "integer",
+                    "deprecationMessage": "Use `network.tag` instead"
+                },
+                "vmid": {
+                    "type": "integer",
+                    "description": "The VM identifier in proxmox (100-999999999)\n"
+                }
+            },
+            "required": [
+                "bootdisk",
+                "defaultIpv4Address",
+                "name",
+                "nameserver",
+                "rebootRequired",
+                "scsihw",
+                "searchdomain",
+                "sshHost",
+                "sshPort",
+                "targetNode",
+                "unusedDisks",
+                "vmid"
+            ],
+            "inputProperties": {
+                "additionalWait": {
+                    "type": "integer"
+                },
+                "agent": {
+                    "type": "integer"
+                },
+                "args": {
+                    "type": "string"
+                },
+                "automaticReboot": {
+                    "type": "boolean",
+                    "description": "Automatically reboot the VM if any of the modified parameters requires a reboot to take effect.\n"
+                },
+                "balloon": {
+                    "type": "integer"
+                },
+                "bios": {
+                    "type": "string",
+                    "description": "The VM bios, it can be seabios or ovmf\n"
+                },
+                "boot": {
+                    "type": "string",
+                    "description": "Boot order of the VM\n"
+                },
+                "bootdisk": {
+                    "type": "string"
+                },
+                "bridge": {
+                    "type": "string",
+                    "deprecationMessage": "Use `network.bridge` instead"
+                },
+                "ciWait": {
+                    "type": "integer"
+                },
+                "cicustom": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "cipassword": {
+                    "type": "string"
+                },
+                "ciuser": {
+                    "type": "string"
+                },
+                "clone": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "cloneWait": {
+                    "type": "integer"
+                },
+                "cloudinitCdromStorage": {
+                    "type": "string"
+                },
+                "cores": {
+                    "type": "integer"
+                },
+                "cpu": {
+                    "type": "string"
+                },
+                "defineConnectionInfo": {
+                    "type": "boolean",
+                    "description": "By default define SSH for provisioner info\n"
+                },
+                "desc": {
+                    "type": "string",
+                    "description": "The VM description\n"
+                },
+                "diskGb": {
+                    "type": "number",
+                    "deprecationMessage": "Use `disk.size` instead"
+                },
+                "disks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMDisk:QemuVMDisk"
+                    }
+                },
+                "forceCreate": {
+                    "type": "boolean"
+                },
+                "forceRecreateOnChangeOf": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "fullClone": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "guestAgentReadyTimeout": {
+                    "type": "integer",
+                    "deprecationMessage": "Use custom per-resource timeout instead. See https://www.terraform.io/docs/language/resources/syntax.html#operation-timeouts"
+                },
+                "hagroup": {
+                    "type": "string"
+                },
+                "hastate": {
+                    "type": "string"
+                },
+                "hostpcis": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMHostpci:QemuVMHostpci"
+                    }
+                },
+                "hotplug": {
+                    "type": "string"
+                },
+                "ipconfig0": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig1": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig10": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig11": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig12": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig13": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig14": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig15": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig2": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig3": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig4": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig5": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig6": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig7": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig8": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "ipconfig9": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "iso": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "kvm": {
+                    "type": "boolean"
+                },
+                "mac": {
+                    "type": "string",
+                    "deprecationMessage": "Use `network.macaddr` to access the auto generated MAC address"
+                },
+                "memory": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "The VM name\n"
+                },
+                "nameserver": {
+                    "type": "string"
+                },
+                "networks": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMNetwork:QemuVMNetwork"
+                    }
+                },
+                "nic": {
+                    "type": "string",
+                    "deprecationMessage": "Use `network` instead"
+                },
+                "numa": {
+                    "type": "boolean"
+                },
+                "onboot": {
+                    "type": "boolean",
+                    "description": "VM autostart on boot\n"
+                },
+                "oncreate": {
+                    "type": "boolean",
+                    "description": "VM autostart on create\n"
+                },
+                "osNetworkConfig": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "osType": {
+                    "type": "string"
+                },
+                "pool": {
+                    "type": "string"
+                },
+                "preprovision": {
+                    "type": "boolean",
+                    "deprecationMessage": "do not use anymore"
+                },
+                "pxe": {
+                    "type": "boolean",
+                    "willReplaceOnChanges": true
+                },
+                "qemuOs": {
+                    "type": "string"
+                },
+                "scsihw": {
+                    "type": "string"
+                },
+                "searchdomain": {
+                    "type": "string"
+                },
+                "serials": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMSerial:QemuVMSerial"
+                    }
+                },
+                "sockets": {
+                    "type": "integer"
+                },
+                "sshForwardIp": {
+                    "type": "string",
+                    "description": "Use to pass instance ip address, redundant\n"
+                },
+                "sshPrivateKey": {
+                    "type": "string"
+                },
+                "sshUser": {
+                    "type": "string",
+                    "willReplaceOnChanges": true
+                },
+                "sshkeys": {
+                    "type": "string"
+                },
+                "startup": {
+                    "type": "string",
+                    "description": "Startup order of the VM\n"
+                },
+                "storage": {
+                    "type": "string",
+                    "deprecationMessage": "Use `disk.storage` instead"
+                },
+                "storageType": {
+                    "type": "string",
+                    "deprecationMessage": "Use `disk.type` instead"
+                },
+                "tablet": {
+                    "type": "boolean",
+                    "description": "Enable tablet mode in the VM\n"
+                },
+                "tags": {
+                    "type": "string"
+                },
+                "targetNode": {
+                    "type": "string",
+                    "description": "The node where VM goes to\n"
+                },
+                "usbs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMUsb:QemuVMUsb"
+                    }
+                },
+                "vcpus": {
+                    "type": "integer"
+                },
+                "vgas": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/types/proxmoxve:index/QemuVMVga:QemuVMVga"
+                    }
+                },
+                "vlan": {
+                    "type": "integer",
+                    "deprecationMessage": "Use `network.tag` instead"
+                },
+                "vmid": {
+                    "type": "integer",
+                    "description": "The VM identifier in proxmox (100-999999999)\n",
+                    "willReplaceOnChanges": true
+                }
+            },
+            "requiredInputs": [
+                "targetNode"
+            ],
+            "stateInputs": {
+                "description": "Input properties used for looking up and filtering QemuVM resources.\n",
+                "properties": {
+                    "additionalWait": {
+                        "type": "integer"
+                    },
+                    "agent": {
+                        "type": "integer"
+                    },
+                    "args": {
+                        "type": "string"
+                    },
+                    "automaticReboot": {
+                        "type": "boolean",
+                        "description": "Automatically reboot the VM if any of the modified parameters requires a reboot to take effect.\n"
+                    },
+                    "balloon": {
+                        "type": "integer"
+                    },
+                    "bios": {
+                        "type": "string",
+                        "description": "The VM bios, it can be seabios or ovmf\n"
+                    },
+                    "boot": {
+                        "type": "string",
+                        "description": "Boot order of the VM\n"
+                    },
+                    "bootdisk": {
+                        "type": "string"
+                    },
+                    "bridge": {
+                        "type": "string",
+                        "deprecationMessage": "Use `network.bridge` instead"
+                    },
+                    "ciWait": {
+                        "type": "integer"
+                    },
+                    "cicustom": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "cipassword": {
+                        "type": "string"
+                    },
+                    "ciuser": {
+                        "type": "string"
+                    },
+                    "clone": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "cloneWait": {
+                        "type": "integer"
+                    },
+                    "cloudinitCdromStorage": {
+                        "type": "string"
+                    },
+                    "cores": {
+                        "type": "integer"
+                    },
+                    "cpu": {
+                        "type": "string"
+                    },
+                    "defaultIpv4Address": {
+                        "type": "string",
+                        "description": "Use to track vm ipv4 address\n"
+                    },
+                    "defineConnectionInfo": {
+                        "type": "boolean",
+                        "description": "By default define SSH for provisioner info\n"
+                    },
+                    "desc": {
+                        "type": "string",
+                        "description": "The VM description\n"
+                    },
+                    "diskGb": {
+                        "type": "number",
+                        "deprecationMessage": "Use `disk.size` instead"
+                    },
+                    "disks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/proxmoxve:index/QemuVMDisk:QemuVMDisk"
+                        }
+                    },
+                    "forceCreate": {
+                        "type": "boolean"
+                    },
+                    "forceRecreateOnChangeOf": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "fullClone": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "guestAgentReadyTimeout": {
+                        "type": "integer",
+                        "deprecationMessage": "Use custom per-resource timeout instead. See https://www.terraform.io/docs/language/resources/syntax.html#operation-timeouts"
+                    },
+                    "hagroup": {
+                        "type": "string"
+                    },
+                    "hastate": {
+                        "type": "string"
+                    },
+                    "hostpcis": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/proxmoxve:index/QemuVMHostpci:QemuVMHostpci"
+                        }
+                    },
+                    "hotplug": {
+                        "type": "string"
+                    },
+                    "ipconfig0": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig1": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig10": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig11": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig12": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig13": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig14": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig15": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig2": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig3": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig4": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig5": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig6": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig7": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig8": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "ipconfig9": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "iso": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "kvm": {
+                        "type": "boolean"
+                    },
+                    "mac": {
+                        "type": "string",
+                        "deprecationMessage": "Use `network.macaddr` to access the auto generated MAC address"
+                    },
+                    "memory": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The VM name\n"
+                    },
+                    "nameserver": {
+                        "type": "string"
+                    },
+                    "networks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/proxmoxve:index/QemuVMNetwork:QemuVMNetwork"
+                        }
+                    },
+                    "nic": {
+                        "type": "string",
+                        "deprecationMessage": "Use `network` instead"
+                    },
+                    "numa": {
+                        "type": "boolean"
+                    },
+                    "onboot": {
+                        "type": "boolean",
+                        "description": "VM autostart on boot\n"
+                    },
+                    "oncreate": {
+                        "type": "boolean",
+                        "description": "VM autostart on create\n"
+                    },
+                    "osNetworkConfig": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "osType": {
+                        "type": "string"
+                    },
+                    "pool": {
+                        "type": "string"
+                    },
+                    "preprovision": {
+                        "type": "boolean",
+                        "deprecationMessage": "do not use anymore"
+                    },
+                    "pxe": {
+                        "type": "boolean",
+                        "willReplaceOnChanges": true
+                    },
+                    "qemuOs": {
+                        "type": "string"
+                    },
+                    "rebootRequired": {
+                        "type": "boolean",
+                        "description": "Internal variable, true if any of the modified parameters requires a reboot to take effect.\n"
+                    },
+                    "scsihw": {
+                        "type": "string"
+                    },
+                    "searchdomain": {
+                        "type": "string"
+                    },
+                    "serials": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/proxmoxve:index/QemuVMSerial:QemuVMSerial"
+                        }
+                    },
+                    "sockets": {
+                        "type": "integer"
+                    },
+                    "sshForwardIp": {
+                        "type": "string",
+                        "description": "Use to pass instance ip address, redundant\n"
+                    },
+                    "sshHost": {
+                        "type": "string"
+                    },
+                    "sshPort": {
+                        "type": "string"
+                    },
+                    "sshPrivateKey": {
+                        "type": "string"
+                    },
+                    "sshUser": {
+                        "type": "string",
+                        "willReplaceOnChanges": true
+                    },
+                    "sshkeys": {
+                        "type": "string"
+                    },
+                    "startup": {
+                        "type": "string",
+                        "description": "Startup order of the VM\n"
+                    },
+                    "storage": {
+                        "type": "string",
+                        "deprecationMessage": "Use `disk.storage` instead"
+                    },
+                    "storageType": {
+                        "type": "string",
+                        "deprecationMessage": "Use `disk.type` instead"
+                    },
+                    "tablet": {
+                        "type": "boolean",
+                        "description": "Enable tablet mode in the VM\n"
+                    },
+                    "tags": {
+                        "type": "string"
+                    },
+                    "targetNode": {
+                        "type": "string",
+                        "description": "The node where VM goes to\n"
+                    },
+                    "unusedDisks": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/proxmoxve:index/QemuVMUnusedDisk:QemuVMUnusedDisk"
+                        },
+                        "description": "Record unused disks in proxmox. This is intended to be read-only for now.\n"
+                    },
+                    "usbs": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/proxmoxve:index/QemuVMUsb:QemuVMUsb"
+                        }
+                    },
+                    "vcpus": {
+                        "type": "integer"
+                    },
+                    "vgas": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/types/proxmoxve:index/QemuVMVga:QemuVMVga"
+                        }
+                    },
+                    "vlan": {
+                        "type": "integer",
+                        "deprecationMessage": "Use `network.tag` instead"
+                    },
+                    "vmid": {
+                        "type": "integer",
+                        "description": "The VM identifier in proxmox (100-999999999)\n",
+                        "willReplaceOnChanges": true
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
