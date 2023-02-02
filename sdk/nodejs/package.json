@@ -25,6 +25,6 @@
     "pulumi": {
         "resource": true,
         "name": "proxmoxve",
-        "server": "https://github.com/Doublemine/pulumi-proxmoxve/releases/"
+        "server": "github://api.github.com/Doublemine/pulumi-proxmoxve"
     }
 }

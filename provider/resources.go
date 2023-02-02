@@ -69,7 +69,7 @@ func Provider() tfbridge.ProviderInfo {
 		// PluginDownloadURL is an optional URL used to download the Provider
 		// for use in Pulumi programs
 		// e.g https://github.com/org/pulumi-provider-name/releases/
-		PluginDownloadURL: "https://github.com/Doublemine/pulumi-proxmoxve/releases/",
+		PluginDownloadURL: "github://api.github.com/Doublemine/pulumi-proxmoxve",
 		Description:       "A Pulumi package for creating and managing proxmoxve cloud resources.",
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
