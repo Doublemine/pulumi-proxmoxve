@@ -1,3 +1,4 @@
+---
 archives:
   - id: archive
     name_template: '{{ .Binary }}-{{ .Tag }}-{{ .Os }}-{{ .Arch }}'
@@ -9,6 +10,7 @@ builds:
     dir: provider
     env:
       - CGO_ENABLED=0
+      - GO111MODULE=on
     goarch:
       - amd64
       - arm64
@@ -17,13 +19,18 @@ builds:
       - windows
       - linux
     ldflags:
-      # The line below MUST align with the module in current provider/go.mod
-      - -X github.com/your-org-name/pulumi-proxmoxve/provider/pkg/version.Version={{.Tag }}
+      - -X github.com/Doublemine/pulumi-proxmoxve/provider/pkg/version.Version={{ .Tag }}
     main: ./cmd/pulumi-resource-proxmoxve/
 changelog:
-  skip: true
+  skip: false
+  use: github
+  filters:
+    exclude:
+      - '^docs:'
+      - '^chore:'
+      - '^chore\(.*\):'
+      - typo
 release:
   disable: false
-  prerelease: auto
 snapshot:
   name_template: '{{ .Tag }}-SNAPSHOT'
