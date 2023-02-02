@@ -11,6 +11,7 @@
     "license": "Apache-2.0",
     "attribution": "This Pulumi package is based on the [`proxmox` Terraform Provider](https://github.com/Doublemine/terraform-provider-proxmox).",
     "repository": "https://github.com/Doublemine/pulumi-proxmoxve",
+    "pluginDownloadURL": "https://github.com/Doublemine/pulumi-proxmoxve/releases/",
     "publisher": "Doublemine",
     "meta": {
         "moduleFormat": "(.*)(?:/[^/]*)"
