@@ -32,7 +32,7 @@ const (
 	// registries for nodejs and python:
 	mainPkg = "proxmoxve"
 	// modules:
-	mainMod = "index" // the proxmoxve module
+	mainMod = "proxmox" // the proxmoxve module
 )
 
 // preConfigureCallback is called before the providerConfigure function of the underlying provider.
@@ -51,7 +51,7 @@ func Provider() tfbridge.ProviderInfo {
 	// Create a Pulumi provider mapping
 	prov := tfbridge.ProviderInfo{
 		P:    p,
-		Name: "proxmoxve",
+		Name: "proxmox",
 		// DisplayName is a way to be able to change the casing of the provider
 		// name when being displayed on the Pulumi registry
 		DisplayName: "pulumi-proxmoxve",
@@ -69,7 +69,7 @@ func Provider() tfbridge.ProviderInfo {
 		// PluginDownloadURL is an optional URL used to download the Provider
 		// for use in Pulumi programs
 		// e.g https://github.com/org/pulumi-provider-name/releases/
-		PluginDownloadURL: "",
+		PluginDownloadURL: "https://github.com/Doublemine/pulumi-proxmoxve/releases/",
 		Description:       "A Pulumi package for creating and managing proxmoxve cloud resources.",
 		// category/cloud tag helps with categorizing the package in the Pulumi Registry.
 		// For all available categories, see `Keywords` in
@@ -107,6 +107,11 @@ func Provider() tfbridge.ProviderInfo {
 			// },
 			"proxmox_vm_qemu": {Tok: tfbridge.MakeResource(mainPkg, mainMod, "QemuVM")},
 			"proxmox_pool":    {Tok: tfbridge.MakeResource(mainPkg, mainMod, "Pool")},
+			"proxmox_lxc":     {Tok: tfbridge.MakeResource(mainPkg, mainMod, "LXCContainer")},
+			"proxmox_lxc_disk": {
+				Tok:                 tfbridge.MakeResource(mainPkg, mainMod, "LXCDisk"),
+				DeleteBeforeReplace: false,
+			},
 		},
 		DataSources: map[string]*tfbridge.DataSourceInfo{
 			// Map each resource in the Terraform provider to a Pulumi function. An example

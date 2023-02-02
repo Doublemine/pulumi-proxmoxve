@@ -11,7 +11,8 @@ VERSION_PATH     := ${PROVIDER_PATH}/pkg/version.Version
 
 TFGEN           := pulumi-tfgen-${PACK}
 PROVIDER        := pulumi-resource-${PACK}
-VERSION         := $(shell pulumictl get version)
+# VERSION         := $(shell pulumictl get version)
+VERSION         := 2023.2.1-final
 
 TESTPARALLELISM := 4
 
@@ -124,3 +125,5 @@ install_sdks:: install_dotnet_sdk install_python_sdk install_nodejs_sdk
 test::
 	cd examples && go test -v -tags=all -parallel ${TESTPARALLELISM} -timeout 2h
 
+
+wanyoo: tfgen build_nodejs install_nodejs_sdk
