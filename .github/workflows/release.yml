@@ -101,6 +101,9 @@ jobs:
           path: ${{ github.workspace}}/sdk/${{ matrix.language }}.tar.gz
 
   publish_provider:
+    permissions:
+      id-token: write
+      contents: write
     runs-on: ubuntu-latest
     name: Publish Provider
     needs:
