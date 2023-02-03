@@ -2,6 +2,8 @@
 
 The ProxmoxVE Resource Provider lets you manage [ProxmoxVE](http://proxmox.com) resources.
 
+The provider is built on https://github.com/Telmate/terraform-provider-proxmox.
+
 ## Installing
 
 This package is available for several languages/platforms:
